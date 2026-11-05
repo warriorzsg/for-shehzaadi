@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Shehzaadi | A Birthday Universe</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Playfair Display for Serifs, Montserrat for Sans-Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Stars Background Canvas -->
+    <canvas id="stars"></canvas>
+
+    <!-- Music Control -->
+    <div class="music-control muted" id="musicControl" title="Toggle Music">
+        <div class="music-icon">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <span class="music-text">Play Music</span>
+    </div>
+
+    <!-- 1. OPENING EXPERIENCE -->
+    <section id="opening" class="active">
+        <div class="opening-content">
+            <p class="fade-in serif italic">Some people make ordinary days extraordinary.</p>
+            <h1 class="reveal-text gold-gradient">FOR MY SHEHZAADI</h1>
+            <p class="fade-in delay-1">A little universe created just for you.</p>
+            <button class="btn-gold fade-in delay-2" id="enterBtn">Enter Your Universe</button>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT (Initially Hidden) -->
+    <main id="mainContent" class="hidden">
+
+        <!-- 4. HERO SECTION -->
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="serif gold-gradient">Happy Birthday, Sunita.</h2>
+                    <p class="hero-subtitle">To the one who makes life a little more beautiful.</p>
+                    <div class="gold-divider">✦</div>
+                    <button class="btn-text scrollTo" data-target="gallery">Explore Your Surprise ↓</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SPECIAL DATE SECTION -->
+        <section id="date">
+            <div class="container">
+                <div class="date-card">
+                    <h3 class="serif gold-gradient">A Date Worth Remembering</h3>
+                    <div class="calendar-visual">
+                        <span class="month serif">Kartik</span>
+                        <span class="day serif gold-gradient">22</span>
+                    </div>
+                    <p>This day is special because it celebrates both of us. A shared moment in time, dedicated to the joy you bring into the world.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PHOTO GALLERY -->
+        <section id="gallery">
+            <div class="container">
+                <h3 class="serif section-title gold-gradient">Moments Frozen in Time</h3>
+                <div class="gallery-grid">
+                    <!-- Placeholder Images - Replace with actual paths later -->
+                    <div class="gallery-item" onclick="openLightbox(0)">
+                        <img src="https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+1" alt="Placeholder 1">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(1)">
+                        <img src="https://via.placeholder.com/600x600/101010/D6B46A?text=Photo+2" alt="Placeholder 2">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(2)">
+                        <img src="https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+3" alt="Placeholder 3">
+                    </div>
+                     <div class="gallery-item" onclick="openLightbox(3)">
+                        <img src="https://via.placeholder.com/800x600/101010/D6B46A?text=Photo+4" alt="Placeholder 4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 22 REASONS SECTION -->
+        <section id="reasons">
+            <div class="container">
+                <h3 class="serif section-title gold-gradient">22 Reasons You're Special</h3>
+                <div class="reasons-grid" id="reasonsGrid">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. OUR LITTLE STORY -->
+        <section id="story">
+            <div class="container">
+                <h3 class="serif section-title gold-gradient">Every Little Moment Matters</h3>
+                <div class="timeline" id="timeline">
+                    <!-- JS will populate placeholders -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. PERSONAL LETTER -->
+        <section id="letter">
+            <div class="container">
+                <div class="envelope-wrapper" id="envelope">
+                    <div class="envelope">
+                        <div class="flap"></div>
+                        <div class="body"></div>
+                        <div class="letter-content serif">
+                            <p>Dear Sunita,</p>
+                            <p>Today is more than just a birthday. It is a reminder of how special you are and how grateful I am to have you in my life.</p>
+                            <p>I hope this new chapter brings you happiness, beautiful memories, endless opportunities, and everything your heart wishes for.</p>
+                            <p>Never forget how special you are.</p>
+                            <p class="italic">Happy Birthday, my Shehzaadi.</p>
+                            <p class="signature">With love.</p>
+                        </div>
+                    </div>
+                    <div class="envelope-text">A Letter Just For You</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. FINAL SURPRISE -->
+        <section id="surprise">
+            <div class="container">
+                <div class="surprise-content" id="surpriseContent">
+                    <h3 class="serif gold-gradient">One Last Surprise...</h3>
+                    <button class="btn-gold" id="revealBtn">Reveal Your Surprise</button>
+                </div>
+                <div class="final-message hidden" id="finalMessage">
+                    <h2 class="serif gold-gradient big-text">HAPPY BIRTHDAY, MY SHEHZAADI</h2>
+                    <p class="serif italic">May your world always be as beautiful as your heart.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 13. FOOTER -->
+    <footer>
+        <div class="container">
+            <p>Made with love, exclusively for Sunita.</p>
+            <p class="serif italic">Some people are simply unforgettable. <span class="star-icon">✦</span></p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <!-- Hidden Audio Element (Requires user interaction to play) -->
+    <audio id="bgMusic" loop>
+        <source src="assets/music/background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
