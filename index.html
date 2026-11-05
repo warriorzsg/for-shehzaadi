@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Shehzaadi | A Birthday Universe</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts: Playfair Display for Serifs, Montserrat for Sans-Serif -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Use specific font weights to reduce load -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Stars Background Canvas -->
     <canvas id="stars"></canvas>
 
-    <!-- Music Control -->
+    <!-- Music Control (Muted by default to comply with browser policy) -->
     <div class="music-control muted" id="musicControl" title="Toggle Music">
-        <div class="music-icon">
+        <div class="music-icon" aria-hidden="true">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-        <span class="music-text">Play Music</span>
+        <span class="music-text">Music</span>
     </div>
 
     <!-- 1. OPENING EXPERIENCE -->
@@ -44,8 +42,8 @@
                 <div class="hero-content">
                     <h2 class="serif gold-gradient">Happy Birthday, Sunita.</h2>
                     <p class="hero-subtitle">To the one who makes life a little more beautiful.</p>
-                    <div class="gold-divider">✦</div>
-                    <button class="btn-text scrollTo" data-target="gallery">Explore Your Surprise ↓</button>
+                    <div class="gold-divider" aria-hidden="true">✦</div>
+                    <button class="btn-text scrollTo" data-target="date">Explore Your Surprise ↓</button>
                 </div>
             </div>
         </section>
@@ -68,19 +66,19 @@
         <section id="gallery">
             <div class="container">
                 <h3 class="serif section-title gold-gradient">Moments Frozen in Time</h3>
-                <div class="gallery-grid">
-                    <!-- Placeholder Images - Replace with actual paths later -->
-                    <div class="gallery-item" onclick="openLightbox(0)">
-                        <img src="https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+1" alt="Placeholder 1">
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Standardized asset paths for easier replacement -->
+                    <div class="gallery-item" data-index="0">
+                        <img src="assets/photos/photo-1.jpg" alt="Gallery Image 1" onerror="this.src='https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+1'">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox(1)">
-                        <img src="https://via.placeholder.com/600x600/101010/D6B46A?text=Photo+2" alt="Placeholder 2">
+                    <div class="gallery-item" data-index="1">
+                        <img src="assets/photos/photo-2.jpg" alt="Gallery Image 2" onerror="this.src='https://via.placeholder.com/600x600/101010/D6B46A?text=Photo+2'">
                     </div>
-                    <div class="gallery-item" onclick="openLightbox(2)">
-                        <img src="https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+3" alt="Placeholder 3">
+                    <div class="gallery-item" data-index="2">
+                        <img src="assets/photos/photo-3.jpg" alt="Gallery Image 3" onerror="this.src='https://via.placeholder.com/600x800/101010/D6B46A?text=Photo+3'">
                     </div>
-                     <div class="gallery-item" onclick="openLightbox(3)">
-                        <img src="https://via.placeholder.com/800x600/101010/D6B46A?text=Photo+4" alt="Placeholder 4">
+                    <div class="gallery-item" data-index="3">
+                        <img src="assets/photos/photo-4.jpg" alt="Gallery Image 4" onerror="this.src='https://via.placeholder.com/800x600/101010/D6B46A?text=Photo+4'">
                     </div>
                 </div>
             </div>
@@ -101,29 +99,24 @@
             <div class="container">
                 <h3 class="serif section-title gold-gradient">Every Little Moment Matters</h3>
                 <div class="timeline" id="timeline">
-                    <!-- JS will populate placeholders -->
+                    <!-- JS will populate this -->
                 </div>
             </div>
         </section>
 
         <!-- 9. PERSONAL LETTER -->
         <section id="letter">
-            <div class="container">
+            <div class="container envelope-container">
                 <div class="envelope-wrapper" id="envelope">
                     <div class="envelope">
                         <div class="flap"></div>
                         <div class="body"></div>
-                        <div class="letter-content serif">
-                            <p>Dear Sunita,</p>
-                            <p>Today is more than just a birthday. It is a reminder of how special you are and how grateful I am to have you in my life.</p>
-                            <p>I hope this new chapter brings you happiness, beautiful memories, endless opportunities, and everything your heart wishes for.</p>
-                            <p>Never forget how special you are.</p>
-                            <p class="italic">Happy Birthday, my Shehzaadi.</p>
-                            <p class="signature">With love.</p>
+                        <div class="letter-content serif" id="letterContent">
+                            <!-- JS will populate editable letter -->
                         </div>
                     </div>
-                    <div class="envelope-text">A Letter Just For You</div>
                 </div>
+                <div class="envelope-text">A Letter Just For You</div>
             </div>
         </section>
 
@@ -147,21 +140,20 @@
     <footer>
         <div class="container">
             <p>Made with love, exclusively for Sunita.</p>
-            <p class="serif italic">Some people are simply unforgettable. <span class="star-icon">✦</span></p>
+            <p class="serif italic">Some people are simply unforgettable. <span class="star-icon" aria-hidden="true">✦</span></p>
         </div>
     </footer>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
-        <span class="close-lightbox">&times;</span>
-        <img class="lightbox-content" id="lightboxImg">
+    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged gallery photo">
     </div>
 
-    <!-- Hidden Audio Element (Requires user interaction to play) -->
-    <audio id="bgMusic" loop>
+    <!-- Hidden Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
         <source src="assets/music/background.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </div>
+    </audio>
 
     <script src="script.js"></script>
 </body>
