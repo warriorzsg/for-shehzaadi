@@ -51,6 +51,8 @@ function initOpening() {
     const opening = document.getElementById('opening');
     const mainContent = document.getElementById('mainContent');
 
+    if (!enterBtn || !opening || !mainContent) return; // Null check
+
     enterBtn.addEventListener('click', () => {
         opening.classList.add('fade-out');
         mainContent.classList.remove('hidden');
@@ -64,10 +66,13 @@ function initOpening() {
 // --- BACKGROUND (STARS) ---
 function initStars() {
     const canvas = document.getElementById('stars');
+    if (!canvas) return; // Null check
     const ctx = canvas.getContext('2d');
+    if (!ctx) return; // Null check
     
     let width, height, stars = [];
-    
+    let animationFrameId;
+
     function setCanvasSize() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
@@ -119,10 +124,15 @@ function initStars() {
             star.update();
             star.draw();
         });
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
     }
     
     animate();
+
+    // Clean up animation on resize to prevent resource leak
+    window.addEventListener('unload', () => {
+        cancelAnimationFrame(animationFrameId);
+    });
 }
 
 // --- UTILITIES ---
@@ -130,7 +140,10 @@ function initScrolling() {
     document.querySelectorAll('.scrollTo').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const targetId = e.target.getAttribute('data-target');
-            document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) { // Null check
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 }
@@ -140,25 +153,30 @@ const galleryItems = document.querySelectorAll('.gallery-item img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 
-function openLightbox(index) {
-    lightbox.classList.add('active');
-    lightboxImg.src = galleryItems[index].src;
-}
-
-function closeLightbox() {
-    lightbox.classList.remove('active');
-}
-
-// Close lightbox on 'Esc' key
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        closeLightbox();
+if (lightbox && lightboxImg) { // Null checks
+    function openLightbox(index) {
+        if (galleryItems[index]) { // Check if index exists
+            lightbox.classList.add('active');
+            lightboxImg.src = galleryItems[index].src;
+        }
     }
-});
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+    }
+
+    // Close lightbox on 'Esc' key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+}
 
 // --- 7. 22 REASONS ---
 function initReasons() {
     const grid = document.getElementById('reasonsGrid');
+    if (!grid) return; // Null check
     reasons.forEach((reason, index) => {
         const card = document.createElement('div');
         card.className = 'reason-card';
@@ -178,6 +196,7 @@ function initReasons() {
 // --- 8. TIMELINE ---
 function initTimeline() {
     const timeline = document.getElementById('timeline');
+    if (!timeline) return; // Null check
     memories.forEach((memory, index) => {
         const item = document.createElement('div');
         item.className = `timeline-item ${index % 2 === 0 ? 'left' : 'right'}`;
@@ -204,6 +223,8 @@ function initSurprise() {
     const content = document.getElementById('surpriseContent');
     const message = document.getElementById('finalMessage');
 
+    if (!revealBtn || !content || !message) return; // Null checks
+
     revealBtn.addEventListener('click', () => {
         content.classList.add('hidden');
         message.classList.remove('hidden');
@@ -218,8 +239,10 @@ function initSurprise() {
 // --- 11. MUSIC EXPERIENCE ---
 function initMusic() {
     const control = document.getElementById('musicControl');
-    const text = control.querySelector('.music-text');
+    const text = control ? control.querySelector('.music-text') : null;
     const audio = document.getElementById('bgMusic');
+
+    if (!control || !text || !audio) return; // Null checks
 
     control.addEventListener('click', () => {
         if (audio.muted || audio.paused) {
